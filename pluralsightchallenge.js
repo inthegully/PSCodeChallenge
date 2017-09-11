@@ -40,21 +40,21 @@ function format(input) {
     return accum;
   }, {})
 
-  console.log(tree);
+  graph(tree);
   return tree;
 }
 
 format(validInput2);
 
 //create a sorted dependency graph
-function graph(object) {
+function graph(obj) {
   const sorted = [];  //sorted list of items with no duplicates
   const iterated = {}; //items already looped over
   const keys = Object.keys(obj);
-  const sortedString;
+  // const sortedString;
 
   //Sort packages
-  keys.forEach(function iterate(key, ancestors) {
+  keys.forEach(function recurse(key, ancestors) {
 
     //create ancestors array if it doesn't yet exist
     if (!Array.isArray(ancestors)) {
@@ -66,12 +66,19 @@ function graph(object) {
     iterated[key] = true;
 
     //check for cycle
-    obj[key].forEach(dependency) {
+    obj[key].forEach(function(dependency){
       //if the key/dependency is in ancestors already then a cycle exists
-      if (ancestor.includes(dependency)) {
+      if (ancestors.includes(dependency)) {
         throw new Error("Yikes a cycle exists!")
       }
-      //now what
-    }
-  })
+      //checking for visited items: if it is already visited then the loop stops
+      if (iterated[dependency]){
+        return
+      }
+      console.log(ancestors);
+    });
+    //have to call function for it to work...and start over from the first one
+  });
+  //print data
+  // return sortedString;
 }
