@@ -2,7 +2,6 @@
 // Starting with what I'm given...
 
 const validInput1 = ["KittenService: CamelCaser", "CamelCaser: "];
-const expectedOutput1 = "CamelCaser, KittenService";
 const validInput2 = [
   "KittenService: ",
   "Leetmeme: Cyberportal",
@@ -11,7 +10,6 @@ const validInput2 = [
   "Fraudstream: Leetmeme",
   "Ice: "
 ];
-const expectedOutput2 = "KittenService, Ice, Cyberportal, Leetmeme, CamelCaser, Fraudstream";
 const invalidInput1 = [
   "KittenService: ",
   "Leetmeme: Cyberportal",
@@ -43,8 +41,6 @@ function format(input) {
   graph(tree);
   return tree;
 }
-
-format(validInput2);
 
 //create a sorted dependency graph
 function graph(obj) {
@@ -87,3 +83,7 @@ function graph(obj) {
   console.log(sortedString); // prints to console a comma separated string of package names in the order of install,
   return sortedString;
 }
+
+format(validInput2);
+format(validInput1);
+format(invalidInput1);
