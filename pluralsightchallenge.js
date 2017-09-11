@@ -51,7 +51,6 @@ function graph(obj) {
   const sorted = [];  //sorted list of items with no duplicates
   const iterated = {}; //items already looped over
   const keys = Object.keys(obj);
-  // const sortedString;
 
   //Sort packages
   keys.forEach(function recurse(key, ancestors) {
@@ -75,10 +74,16 @@ function graph(obj) {
       if (iterated[dependency]){
         return
       }
-      console.log(ancestors);
+      //recursive call
+      recurse(dependency, ancestors.slice(0));
     });
-    //have to call function for it to work...and start over from the first one
+    //add items to array if it is not already there
+    if (!sorted.includes(key)) {
+      sorted.push(key);
+    }
   });
   //print data
-  // return sortedString;
+  const sortedString = sorted.toString();
+  console.log(sortedString); // prints to console a comma separated string of package names in the order of install,
+  return sortedString;
 }
