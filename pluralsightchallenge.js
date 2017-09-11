@@ -34,7 +34,7 @@ function format(input) {
     // set package as key and dependency as value
     dependencies.push(dependency);
     if (dependency === '') {
-      dependencies = []
+      dependencies = [];
     }
     accum[package] = dependencies;
     return accum;
@@ -45,3 +45,33 @@ function format(input) {
 }
 
 format(validInput2);
+
+//create a sorted dependency graph
+function graph(object) {
+  const sorted = [];  //sorted list of items with no duplicates
+  const iterated = {}; //items already looped over
+  const keys = Object.keys(obj);
+  const sortedString;
+
+  //Sort packages
+  keys.forEach(function iterate(key, ancestors) {
+
+    //create ancestors array if it doesn't yet exist
+    if (!Array.isArray(ancestors)) {
+      ancestors = [];
+    }
+    //push key (with value) to the ancestors array in order to later check for cycles
+    ancestors.push(key);
+    //set value of key to true in order to keep track of visted items
+    iterated[key] = true;
+
+    //check for cycle
+    obj[key].forEach(dependency) {
+      //if the key/dependency is in ancestors already then a cycle exists
+      if (ancestor.includes(dependency)) {
+        throw new Error("Yikes a cycle exists!")
+      }
+      //now what
+    }
+  })
+}
