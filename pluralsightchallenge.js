@@ -25,13 +25,23 @@ const invalidInput1 = [
 
 function format(input) {
   //split packages from dependencies
-  return input.reduce((accum, item) => {
+  const tree = input.reduce((accum, item) => {
     const splitString = item.split(": ");
-    console.log(splitString);
     const package = splitString[0];
     const dependency = splitString[1];
-    return splitString;
+    let dependencies = [];
+
+    // set package as key and dependency as value
+    dependencies.push(dependency);
+    if (dependency === '') {
+      dependencies = []
+    }
+    accum[package] = dependencies;
+    return accum;
   }, {})
+
+  console.log(tree);
+  return tree;
 }
 
 format(validInput2);
